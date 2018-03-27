@@ -19,11 +19,13 @@ class App extends React.Component {
   render() {
     return (
       <section>
+
         <Provider store={store}>
           <BrowserRouter>
             <Route exact path='/' component={Dashboard} />
           </BrowserRouter>
         </Provider>
+       
       </section>
     );
   }

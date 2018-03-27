@@ -69,8 +69,3 @@ class CategoryItem extends React.Component{
 }
 
 export default CategoryItem;
-
-// this.props.handleSubmit(this.state);
-
-// onComplete
-

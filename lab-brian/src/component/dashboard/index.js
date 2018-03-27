@@ -6,6 +6,8 @@ import { connect } from 'react-redux';
 import { categoryCreate, categoryUpdate, categoryDelete } from '../../action/category-action.js';
 import CategoryForm from '../category-form';
 import CategoryItem from '../category-item';
+import Navbar from '../navbar';
+import Footer from '../footer';
 
 class Dashboard extends React.Component {
   // componentDidMount() {
@@ -15,6 +17,7 @@ class Dashboard extends React.Component {
   render() {
     return (
       <section className='dashboard'>
+        <Navbar />
         <p>create a new category.</p>
 
         <CategoryForm
@@ -28,6 +31,7 @@ class Dashboard extends React.Component {
           categories={this.props.categories}
         />
 
+        <Footer />
       </section>
     );
   }
