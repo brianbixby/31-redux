@@ -40,23 +40,25 @@ class CategoryForm extends React.Component {
 
   render() {
     return (
-      <form className='category-form' onSubmit={this.handleSubmit}>
-        <input 
-          name='name'
-          type='text'
-          placeholder='create a new category and track your expenses...'
-          value={this.state.name}
-          onChange={this.handleChange}
-        />
-        <input 
-          name='budget'
-          type='number'
-          placeholder='set a budget for your category...'
-          value={this.state.budget}
-          onChange={this.handleChange}
-        />
-        <button type='submit'>{this.props.buttonText}</button>
-      </form>
+      <div>
+        <form className='category-form' onSubmit={this.handleSubmit}>
+          <input 
+            name='name'
+            type='text'
+            placeholder='create a new category and track your expenses...'
+            value={this.state.name}
+            onChange={this.handleChange}
+          />
+          <input 
+            name='budget'
+            type='number'
+            placeholder='set a budget for your category...'
+            value={this.state.budget}
+            onChange={this.handleChange}
+          />
+          <button type='submit'>{this.props.buttonText}</button>
+        </form>
+      </div>
     );
   }
 }

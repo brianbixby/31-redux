@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 
 import { categoryCreate, categoryUpdate, categoryDelete } from '../../action/category-action.js';
 import CategoryForm from '../category-form';
+import CategoryItem from '../category-item';
 
 class Dashboard extends React.Component {
   // componentDidMount() {
@@ -21,12 +22,12 @@ class Dashboard extends React.Component {
           onComplete={this.props.categoryCreate}
         />
 
-        {this.props.categories.map(item =>
-          <div key={item.id}>
-            <p>{item.name}</p>
-            <p>{item.budget}</p>
-          </div>
-        )}
+        <CategoryItem
+          categoryUpdate={this.props.categoryUpdate}
+          categoryRemove={this.props.categoryDelete}
+          categories={this.props.categories}
+        />
+
       </section>
     );
   }
