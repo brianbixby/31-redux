@@ -6,7 +6,7 @@ const production = process.env.NODE_ENV === 'production';
 const {DefinePlugin, EnvironmentPlugin} = require('webpack');
 const HtmlPlugin = require('html-webpack-plugin');
 const CleanPlugin = require('clean-webpack-plugin');
-// removes white space
+// clean plugin gets rid of any additional folders that get made with your build
 const UglifyPlugin = require('uglifyjs-webpack-plugin');
 // minifies and obfuscates
 const ExtractPlugin = require('extract-text-webpack-plugin');
@@ -23,15 +23,17 @@ let plugins = [
 if(production) {
   plugins = plugins.concat([new CleanPlugin(), new UglifyPlugin()]);
 }
+// removes any additional folders, minifies all production based assetts and folders, if production is true it gets these 2 additional plugins
 
 module.exports = {
   plugins,
-  // sames as plugins: plugins
+  // destructured sames as plugins: plugins
   entry: `${__dirname}/src/main.js`,
   devServer: {
     historyApiFallback: true,
+    // allows for us to use react browser router
   },
-  devtool: production ? undefined : 'eval',
+  devtool: production ? undefined : 'cheap-module-eval-source-map',
   output: {
     path: `${__dirname}/build`,
     publicPath: process.env.CDN_URL,
