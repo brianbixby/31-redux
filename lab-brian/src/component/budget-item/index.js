@@ -3,20 +3,16 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import BudgetForm from '../budget-form';
-import { budgetUpdate, budgetDelete } from '../../action/budget-action.js';
 import CategoryForm from '../category-form';
 import CategoryItem from '../category-item';
-import { categoryCreate as categoryActionCreate } from '../../action/category-action.js';
 
+import { budgetUpdate, budgetDelete } from '../../action/budget-action.js';
+import { categoryCreate as categoryActionCreate } from '../../action/category-action.js';
+import { renderIf } from './../../lib/util';
 
 class BudgetItem extends React.Component{
-  constructor(props) {
-    super(props);
-
-  }
-
   render() {
-    let {budget, budgetUpdate, budgetDelete} = this.props;
+    let {budget, budgetUpdate, budgetDelete, categories} = this.props;
     return (
       <section className='budget-item'>
         <div>
@@ -32,31 +28,25 @@ class BudgetItem extends React.Component{
               onComplete={budgetUpdate}
             />
           </div>
+        </div>
+        <div className='categories-container'>
           <p>create a new category.</p>
           <CategoryForm
+            budgetID={budget.id}
             buttonText='create category'
             onComplete={this.props.categoryCreate}
           />
-
-          {this.props.categories.map(item => 
-            <CategoryItem key={item.id} category={item} />
-          )}
+          { renderIf(categories[budget.id].length, <CategoryItem categories={categories[budget.id]} />)}
         </div>
       </section>
     );
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    categories: [...state.categories],
-  };
-};
-
 let mapDispatchToProps = dispatch => ({
-  categoryCreate: (category) => dispatch(categoryActionCreate(category)),
   budgetUpdate: (budget) => dispatch(budgetUpdate(budget)),
   budgetDelete: (budget) => dispatch(budgetDelete(budget)),
+  categoryCreate: (category) => dispatch(categoryActionCreate(category)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(BudgetItem);
+export default connect(null, mapDispatchToProps)(BudgetItem);

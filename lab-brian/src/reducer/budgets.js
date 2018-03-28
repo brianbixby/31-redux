@@ -10,7 +10,7 @@ export default (state=initialState, action) => {
       return [...state, payload];
     case 'BUDGET_UPDATE':
       return state.map(budget =>
-        budget.id == payload.id ? payload : budget);
+        budget.id === payload.id ? payload : budget);
     case 'BUDGET_DELETE':
       return state.filter( budget => budget.id !== payload.id);
     case 'BUDGET_RESET':

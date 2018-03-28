@@ -14,11 +14,7 @@ export const budgetUpdate = (budget) => ({
 
 export const budgetDelete = (budget) => ({
   type: 'BUDGET_DELETE',
-  payload: budget,
+  payload: {...budget},
 });
 
-export const budgetReset = () => {
-  return {
-    type: 'BUDGET_RESET',
-  };
-};
+export const budgetReset = () => ({ type: 'BUDGET_RESET' });
