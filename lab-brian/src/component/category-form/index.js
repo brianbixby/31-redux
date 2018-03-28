@@ -1,27 +1,23 @@
 'use strict';
 
-import Modal from '../modal';
 import React from 'react';
-
-let renderIf = (test, component) => test ? component : undefined;
 
 class CategoryForm extends React.Component {
   constructor(props) {
     super(props);
-
-    let categoryFormError = false;
-    let name = props.category ? props.category.name : '';
-    let budget = props.category ? props.category.budget : 10;
-
-    this.state = { name, budget, categoryFormError };
+    this.state = props.category ? {...props.category} : { name: '', budget: 0, budgetID: props.budgetID};
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  componentWillReceiveProps(props) {
-    if(props.category) {
-      this.setState({ name: props.category.name, tbudget: props.category.budget });
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.category) {
+      this.setState({...nextProps.category});
+    }
+
+    if (nextProps.budgetID) {
+      this.setState( {budgetID: nextProps.budgetID });
     }
   }
 
@@ -45,18 +41,11 @@ class CategoryForm extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    if(!this.state.budget || !this.state.name) {
-      return this.setState({
-        categoryFormError: true,
-      });
+    this.props.onComplete(this.state);
+    // this.props.onComplete({...this.state});
+    if(!this.props.category) {
+      this.setState({ name: '', budget: 0 });
     }
-    if(this.props.category) {
-      return this.props.onComplete({id: this.props.category.id, ...this.state});
-    }
-    this.props.onComplete({...this.state});
-    // if(!this.props.category) {
-    //   this.setState({ name: '', budget: 0 });
-    // }
   }
 
   render() {
@@ -79,12 +68,6 @@ class CategoryForm extends React.Component {
           />
           <button type='submit'>{this.props.buttonText}</button>
         </form>
-
-        {renderIf(this.state.categoryFormError,
-          <Modal close={() => this.setState({ categoryFormError: false })}>
-            <h1>Sorry, you must choose a category name and set a budget for the category.</h1>
-          </Modal>
-        )}
       </div>
     );
   }

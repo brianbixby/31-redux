@@ -1,28 +1,23 @@
 'use strict';
 
-import Modal from '../modal';
 import React from 'react';
-
-let renderIf = (test, component) => test ? component : undefined;
 
 class ExpenseForm extends React.Component {
   constructor(props) {
     super(props);
-
-    let expenseFormError = false;
-    let categoryID = props.expense ? props.expense.categoryID : '';
-    let expenseName = props.expense ? props.expense.expenseName : '';
-    let expensePrice = props.expense ? props.expense.expensePrice : 0;
-
-    this.state = { expenseFormError , categoryID, expenseName, expensePrice };
+    this.state = props.expense ? {...props.expense} : { expenseName: '', expensePrice: 0, categoryID: props.categoryID};
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  componentWillReceiveProps(props) {
-    if(props.expense) {
-      this.setState({ expenseName: props.expense.expenseName, categoryID: props.expense.categoryID, expensePrice: props.expense.expensePrice });
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.expense) {
+      this.setState({...nextProps.expense});
+    }
+
+    if (nextProps.categoryID) {
+      this.setState( {categoryID: nextProps.categoryID });
     }
   }
 
@@ -46,18 +41,11 @@ class ExpenseForm extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    if(!this.state.expenseName || !this.state.expensePrice) {
-      return this.setState({
-        expenseFormError: true,
-      });
+    this.props.onComplete(this.state);
+    // this.props.onComplete({...this.state});
+    if(!this.props.expense) {
+      this.setState({ expenseName: '', expensePrice: 0 });
     }
-    if(this.props.expense) {
-      return this.props.onComplete({id: this.props.expense.id, ...this.state});
-    }
-    this.props.onComplete({...this.state});
-    // if(!this.props.expense) {
-    //   this.setState({ name: '', budget: 0 });
-    // }
   }
 
   render() {
@@ -80,12 +68,6 @@ class ExpenseForm extends React.Component {
           />
           <button type='submit'>{this.props.buttonText}</button>
         </form>
-
-        {renderIf(this.state.expenseFormError,
-          <Modal close={() => this.setState({ expenseFormError: false })}>
-            <h1>Sorry, you must choose a expense name and set an amount.</h1>
-          </Modal>
-        )}
       </div>
     );
   }

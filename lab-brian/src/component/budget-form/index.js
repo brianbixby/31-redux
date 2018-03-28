@@ -7,10 +7,7 @@ class BudgetForm extends React.Component {
   constructor(props) {
     super(props);
 
-    let budgetName = props.budget ? props.budget.budgetName : '';
-    let totalBudget = props.budget ? props.budget.totalBudget : 0;
-
-    this.state = { totalBudget, budgetName };
+    this.state = props.budget ? {...props.budget} : {budgetName: '', totalBudget: 0};
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -18,7 +15,7 @@ class BudgetForm extends React.Component {
 
   componentWillReceiveProps(props) {
     if(props.budget) {
-      this.setState({ budgetName: props.budget.budgetName, totalBudget: props.budget.totalBudget });
+      this.setState(props.budget);
     }
   }
 
