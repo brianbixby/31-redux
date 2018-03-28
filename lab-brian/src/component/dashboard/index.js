@@ -37,11 +37,9 @@ class Dashboard extends React.Component {
           onComplete={this.props.categoryCreate}
         />
 
-        <CategoryItem
-          categoryUpdate={this.props.categoryUpdate}
-          categoryRemove={this.props.categoryDelete}
-          categories={this.props.categories}
-        />
+        {this.props.categories.map(item => 
+          <CategoryItem key={item.id} category={item} />
+        )}
 
         <Footer />
       </section>

@@ -11,12 +11,18 @@ class CategoryForm extends React.Component {
 
     let categoryFormError = false;
     let name = props.category ? props.category.name : '';
-    let budget = props.category ? props.category.budget : 0;
+    let budget = props.category ? props.category.budget : 10;
 
     this.state = { name, budget, categoryFormError };
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  componentWillReceiveProps(props) {
+    if(props.category) {
+      this.setState({ name: props.category.name, tbudget: props.category.budget });
+    }
   }
 
   handleChange(e) {
@@ -44,7 +50,13 @@ class CategoryForm extends React.Component {
         categoryFormError: true,
       });
     }
-    this.props.onComplete(Object.assign({}, this.state));
+    if(this.props.category) {
+      return this.props.onComplete({id: this.props.category.id, ...this.state});
+    }
+    this.props.onComplete({...this.state});
+    // if(!this.props.category) {
+    //   this.setState({ name: '', budget: 0 });
+    // }
   }
 
   render() {

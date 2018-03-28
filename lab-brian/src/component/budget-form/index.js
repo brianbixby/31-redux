@@ -22,7 +22,6 @@ class BudgetForm extends React.Component {
   // for the put
   componentWillReceiveProps(props) {
     if(props.budget) {
-      this.setState(props.budget);
       this.setState({ budgetName: props.budget.budgetName, totalBudget: props.budget.totalBudget });
     }
   }
