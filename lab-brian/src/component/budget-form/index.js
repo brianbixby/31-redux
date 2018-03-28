@@ -11,12 +11,20 @@ class BudgetForm extends React.Component {
 
     let budgetFormError = false;
     let budgetName = props.budget ? props.budget.budgetName : '';
-    let totalBudget = props.budget ? props.budget.totalBudget : '';
+    let totalBudget = props.budget ? props.budget.totalBudget : 100;
 
     this.state = { totalBudget, budgetName, budgetFormError };
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  // for the put
+  componentWillReceiveProps(props) {
+    if(props.budget) {
+      this.setState(props.budget);
+      this.setState({ budgetName: props.budget.budgetName, totalBudget: props.budget.totalBudget });
+    }
   }
 
   handleChange(e) {
@@ -37,15 +45,22 @@ class BudgetForm extends React.Component {
     }
   }
 
-  // props.budget ? props.budget.budgetName : '';
   handleSubmit(e) {
     e.preventDefault();
+
     if(!this.state.budgetName || !this.state.totalBudget) {
       return this.setState({
         budgetFormError: true,
       });
     }
-    this.props.onComplete(Object.assign({}, this.state));
+
+    if(this.props.budget) {
+      return this.props.onComplete({id: this.props.budget.id, ...this.state});
+    }
+    this.props.onComplete({...this.state});
+    // if(!this.props.budget) {
+    //   this.setState({ budgetName: '', totalBudget: 0 });
+    // }
   }
 
   render() {

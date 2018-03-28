@@ -3,8 +3,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { categoryCreate, categoryUpdate, categoryDelete } from '../../action/category-action.js';
-import { budgetCreate, budgetUpdate, budgetDelete } from '../../action/budget-action.js';
+import { categoryCreate as categoryActionCreate } from '../../action/category-action.js';
+import { budgetCreate as budgetActionCreate } from '../../action/budget-action.js';
 import CategoryForm from '../category-form';
 import CategoryItem from '../category-item';
 import BudgetForm from '../budget-form';
@@ -27,11 +27,9 @@ class Dashboard extends React.Component {
           onComplete={this.props.budgetCreate}
         />
 
-        <BudgetItem
-          budgetUpdate={this.props.budgetUpdate}
-          budgetRemove={this.props.budgetDelete}
-          budgets={this.props.budgets}
-        />
+        {this.props.budgets.map(item => 
+          <BudgetItem key={item.id} budget={item} />
+        )}
 
         <p>create a new category.</p>
         <CategoryForm
@@ -51,11 +49,10 @@ class Dashboard extends React.Component {
   }
 }
 
-
 const mapStateToProps = (state) => {
   return {
-    categories: state.categories,
-    budgets: state.budgets,
+    categories: [...state.categories],
+    budgets: [...state.budgets],
   };
 };
 
@@ -64,12 +61,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch, getState) => {
   // console.log('getstate: ', getState);
   return {
-    categoryCreate: (category) => dispatch(categoryCreate(category)),
-    categoryUpdate: (category) => dispatch(categoryUpdate(category)),
-    categoryDelete: (category) => dispatch(categoryDelete(category)),
-    budgetCreate: (budget) => dispatch(budgetCreate(budget)),
-    budgetUpdate: (budget) => dispatch(budgetUpdate(budget)),
-    budgetDelete: (budget) => dispatch(budgetDelete(budget)),
+    categoryCreate: (category) => dispatch(categoryActionCreate(category)),
+    budgetCreate: (budget) => dispatch(budgetActionCreate(budget)),
   };
 };
 

@@ -40,11 +40,14 @@ class CategoryItem extends React.Component{
   }
 
   render() {
+    // var newData = this.state.data.concat([data]);  
+    // this.setState({data: newData})
+
     return (
       <section className='category-item'>
         <ul>
           {this.props.categories.map(item => {
-            return <li key={item.id}>
+            return (<li key={item.id}>
               <button className='removeButton' onClick={() => this.props.categoryRemove(item)}>X</button>
 
               <div>
@@ -60,7 +63,7 @@ class CategoryItem extends React.Component{
                   this.props.categoryUpdate(category);
                 }}
               />
-            </li>;
+            </li>);
           })}
         </ul>
       </section>

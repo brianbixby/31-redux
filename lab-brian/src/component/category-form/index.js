@@ -11,7 +11,7 @@ class CategoryForm extends React.Component {
 
     let categoryFormError = false;
     let name = props.category ? props.category.name : '';
-    let budget = props.category ? props.category.budget : '';
+    let budget = props.category ? props.category.budget : 0;
 
     this.state = { name, budget, categoryFormError };
 

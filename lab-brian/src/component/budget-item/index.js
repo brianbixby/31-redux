@@ -1,71 +1,42 @@
 'use strict';
 
 import React from 'react';
+import { connect } from 'react-redux';
 import BudgetForm from '../budget-form';
+import { budgetUpdate, budgetDelete } from '../../action/budget-action.js';
 
 class BudgetItem extends React.Component{
   constructor(props) {
     super(props);
 
-    this.state = {
-
-    };
-
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-
-  }
-
-  handleChange(e) {
-    let { name, value, type } = e.target;
-    // let name = e.target.name
-    if (type === 'number') {
-      try {
-        this.setState({
-          [name]: parseInt(value),
-        });
-      } catch(err) {
-        console.error(err);
-      }
-    } else {
-      this.setState({
-        [name]: value,
-      });
-    }
-  }
-
-  handleSubmit(e) {
-    e.preventDefault();
-    this.props.onComplete(Object.assign({}, this.state));
   }
 
   render() {
+    let {budget, budgetUpdate, budgetDelete} = this.props;
     return (
       <section className='budget-item'>
-        <ul>
-          {this.props.budgets.map(item => {
-            return <li key={item.id}>
-              <button className='removeButton' onClick={() => this.props.budgetRemove(item)}>X</button>
-
-              <div>
-                <p>{item.budgetName}</p>
-                <p>{item.totalBudget}</p>
-              </div>
-
-              <BudgetForm
-                buttonText='update budget'
-                budget={item}
-                onComplete={(budget) => {
-                  budget.id = item.id;
-                  this.props.budgetUpdate(budget);
-                }}
-              />
-            </li>;
-          })}
-        </ul>
+        <div>
+          <div className='content'>
+            <p>{budget.budgetName}</p> 
+            <p>{budget.totalBudget}</p>
+            <button onClick={() => budgetDelete(budget)}>X</button>
+          </div>
+          <div className='edit'>
+            <BudgetForm
+              buttonText='update'
+              budget={budget}
+              onComplete={budgetUpdate}
+            />
+          </div>
+        </div>
       </section>
     );
   }
 }
 
-export default BudgetItem;
+let mapDispatchToProps = dispatch => ({
+  budgetUpdate: (budget) => dispatch(budgetUpdate(budget)),
+  budgetDelete: (budget) => dispatch(budgetDelete(budget)),
+});
+
+export default connect(null, mapDispatchToProps)(BudgetItem);
