@@ -5,10 +5,13 @@ import { connect } from 'react-redux';
 
 import { categoryCreate as categoryActionCreate } from '../../action/category-action.js';
 import { budgetCreate as budgetActionCreate } from '../../action/budget-action.js';
+import { expenseCreate as expenseActionCreate } from '../../action/expense-action.js';
 import CategoryForm from '../category-form';
 import CategoryItem from '../category-item';
 import BudgetForm from '../budget-form';
 import BudgetItem from '../budget-item';
+import ExpenseForm from '../expense-form';
+import ExpenseItem from '../expense-item';
 import Navbar from '../navbar';
 import Footer from '../footer';
 
@@ -41,6 +44,16 @@ class Dashboard extends React.Component {
           <CategoryItem key={item.id} category={item} />
         )}
 
+        <p>create a new expense.</p>
+        <ExpenseForm
+          buttonText='create expense'
+          onComplete={this.props.expenseCreate}
+        />
+
+        {this.props.expenses.map(item => 
+          <ExpenseItem key={item.id} expense={item} />
+        )}
+
         <Footer />
       </section>
     );
@@ -51,6 +64,7 @@ const mapStateToProps = (state) => {
   return {
     categories: [...state.categories],
     budgets: [...state.budgets],
+    expenses: [...state.expenses],
   };
 };
 
@@ -61,6 +75,7 @@ const mapDispatchToProps = (dispatch, getState) => {
   return {
     categoryCreate: (category) => dispatch(categoryActionCreate(category)),
     budgetCreate: (budget) => dispatch(budgetActionCreate(budget)),
+    expenseCreate: (expense) => dispatch(budgetActionCreate(expense)),
   };
 };
 
