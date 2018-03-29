@@ -2,7 +2,7 @@
 
 const validateExpense = store => next => action => {
   const isExpense = action.type && action.type.startsWith('EXPENSE');
-  console.log('VALIDATEEXPENSE ACTION__', action);
+  // console.log('VALIDATEEXPENSE ACTION__', action);
 
   if(isExpense) {
     try {

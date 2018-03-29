@@ -2,7 +2,7 @@
 
 const validateCategory = store => next => action => {
   const isCategory = action.type && action.type.startsWith('CATEGORY');
-  console.log('__VALIDATECATEGORY ACTION__', action);
+  // console.log('__VALIDATECATEGORY ACTION__', action);
 
   if(isCategory) {
     try {

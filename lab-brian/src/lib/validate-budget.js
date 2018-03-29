@@ -2,7 +2,7 @@
 
 const validateBudget = store => next => action => {
   const isBudget = action.type && action.type.startsWith('BUDGET');
-  console.log('__VALIDATEBUDGET ACTION__', action);
+  // console.log('__VALIDATEBUDGET ACTION__', action);
 
   if(isBudget) {
     try {

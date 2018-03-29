@@ -13,7 +13,7 @@ import { renderIf } from './../../lib/util';
 class BudgetItem extends React.Component{
   render() {
     let {budget, budgetUpdate, budgetDelete, categories} = this.props;
-    console.log('categories: ', categories);
+    // console.log('categories: ', categories);
     return (
       <section className='budget-item'>
         <div>

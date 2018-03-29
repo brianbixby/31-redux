@@ -46,8 +46,8 @@ class Dashboard extends React.Component {
 const mapStateToProps = (state) => {
   return {
     budgets: state.budgets,
-    expenses: state.expenses,
     categories: state.categories,
+    expenses: state.expenses,
   };
 };
 
