@@ -45,9 +45,6 @@ class Dashboard extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    // budgets: [...state.budgets],
-    // expenses: [...state.expenses],
-    // categories: [...state.categories],
     budgets: state.budgets,
     expenses: state.expenses,
     categories: state.categories,
@@ -61,7 +58,6 @@ const mapDispatchToProps = (dispatch, getState) => {
   return {
     budgetCreate: (budget) => dispatch(budgetActionCreate(budget)),
     categoryCreate: (category) => dispatch(categoryActionCreate(category)),
-    // expenseCreate: (expense) => dispatch(expenseActionCreate(expense)),
   };
 };
 

@@ -1,6 +1,5 @@
 'use strict';
 
-import Modal from '../modal';
 import React from 'react';
 
 class BudgetForm extends React.Component {

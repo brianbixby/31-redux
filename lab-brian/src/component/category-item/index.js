@@ -49,10 +49,16 @@ class CategoryItem extends React.Component{
   }
 }
 
+const mapStateToProps = (state) => {
+  return {
+    expenses: state.expenses,
+  };
+};
+
 let mapDispatchToProps = dispatch => ({
   categoryUpdate: (category) => dispatch(categoryUpdate(category)),
   categoryDelete: (category) => dispatch(categoryDelete(category)),
   expenseCreate: (expense) => dispatch(expenseActionCreate(expense)),
 });
 
-export default connect(null, mapDispatchToProps)(CategoryItem);
+export default connect(mapStateToProps, mapDispatchToProps)(CategoryItem);
