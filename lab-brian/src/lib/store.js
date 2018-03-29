@@ -1,6 +1,13 @@
 ' use strict';
 
-import { createStore } from 'redux';
-import reducer from '../reducer/category.js';
+import { createStore, applyMiddleware } from 'redux';
+import reducer from '../reducer';
+import reporter from './redux-reporter';
+import validateBudget from './validate-budget.js';
+import validateCategory from './validate-category.js';
+import validateExpense from './validate-expense.js';
 
-export default () => createStore(reducer);
+// console.log('__STORE CREATESTORE__', createStore);
+// console.log('__STORE APPLYMIDDLEWARE__', applyMiddleware);
+
+export default () => createStore(reducer, applyMiddleware(reporter, validateBudget, validateCategory, validateExpense));

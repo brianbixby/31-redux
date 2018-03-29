@@ -2,22 +2,22 @@
 
 import React from 'react';
 
-class CategoryForm extends React.Component {
+class ExpenseForm extends React.Component {
   constructor(props) {
     super(props);
-    this.state = props.category ? {...props.category} : { name: '', budget: 0, budgetID: props.budgetID};
+    this.state = props.expense ? {...props.expense} : { expenseName: '', expensePrice: 0, categoryID: props.categoryID};
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.category) {
-      this.setState({...nextProps.category});
+    if (nextProps.expense) {
+      this.setState({...nextProps.expense});
     }
 
-    if (nextProps.budgetID) {
-      this.setState( {budgetID: nextProps.budgetID });
+    if (nextProps.categoryID) {
+      this.setState( {categoryID: nextProps.categoryID });
     }
   }
 
@@ -43,27 +43,27 @@ class CategoryForm extends React.Component {
     e.preventDefault();
     this.props.onComplete(this.state);
     // this.props.onComplete({...this.state});
-    if(!this.props.category) {
-      this.setState({ name: '', budget: 0 });
+    if(!this.props.expense) {
+      this.setState({ expenseName: '', expensePrice: 0 });
     }
   }
 
   render() {
     return (
       <div>
-        <form className='category-form' onSubmit={this.handleSubmit}>
+        <form className='expense-form' onSubmit={this.handleSubmit}>
           <input 
-            name='name'
+            name='expenseName'
             type='text'
-            placeholder='category name'
-            value={this.state.name}
+            placeholder='expense name'
+            value={this.state.expenseName}
             onChange={this.handleChange}
           />
           <input 
-            name='budget'
+            name='expensePrice'
             type='number'
-            placeholder='category budget amount'
-            value={this.state.budget}
+            placeholder='expense amount'
+            value={this.state.expensePrice}
             onChange={this.handleChange}
           />
           <button type='submit'>{this.props.buttonText}</button>
@@ -73,4 +73,4 @@ class CategoryForm extends React.Component {
   }
 }
 
-export default CategoryForm;
+export default ExpenseForm;

@@ -1,71 +1,64 @@
 'use strict';
 
 import React from 'react';
+import { connect } from 'react-redux';
 import CategoryForm from '../category-form';
+import ExpenseForm from '../expense-form';
+import ExpenseItem from '../expense-item';
+
+import { categoryUpdate, categoryDelete } from '../../action/category-action.js';
+import { expenseCreate as expenseActionCreate } from '../../action/expense-action.js';
+import { renderIf } from './../../lib/util';
 
 class CategoryItem extends React.Component{
-  constructor(props) {
-    super(props);
-
-    this.state = {
-
-    };
-
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-
-  }
-
-  handleChange(e) {
-    let { name, value, type } = e.target;
-    // let name = e.target.name
-    if (type === 'number') {
-      try {
-        this.setState({
-          [name]: parseInt(value),
-        });
-      } catch(err) {
-        console.error(err);
-      }
-    } else {
-      this.setState({
-        [name]: value,
-      });
-    }
-  }
-
-  handleSubmit(e) {
-    e.preventDefault();
-    this.props.onComplete(Object.assign({}, this.state));
-  }
-
   render() {
+    let {categories, categoryUpdate, categoryDelete, expenses} = this.props;
+
     return (
       <section className='category-item'>
-        <ul>
-          {this.props.categories.map(item => {
-            return <li key={item.id}>
-              <button className='removeButton' onClick={() => this.props.categoryRemove(item)}>X</button>
-
-              <div>
-                <p>{item.name}</p>
-                <p>{item.budget}</p>
-              </div>
-
-              <CategoryForm
-                buttonText='update category'
-                category={item}
-                onComplete={(category) => {
-                  category.id = item.id;
-                  this.props.categoryUpdate(category);
-                }}
-              />
-            </li>;
-          })}
-        </ul>
+        <div>
+          <div className='content'>
+            <ul className='category-list'>
+              { categories.map(category => console.log(category))}
+              { categories.map(category => 
+                <li className='category-item' key={category}>
+                  <p>{category.name}</p> 
+                  <p>{category.budget}</p>
+                  <button onClick={() => categoryDelete(category)}>X</button>
+                  <CategoryForm 
+                    category={category}
+                    buttonText='UPDATE CATEGORY'
+                    onComplete={categoryUpdate}
+                  />
+                  <div className='expenses-container'>
+                    <p>create a new expense.</p>
+                    <ExpenseForm
+                      categoryID={category.id}
+                      buttonText='create expense'
+                      onComplete={this.props.expenseCreate}
+                    />
+                    { renderIf(expenses[category.id].length, <ExpenseItem expenses={expenses[category.id]} />)}
+                  </div>
+                </li>
+              )}
+            </ul>
+          </div>
+        </div>
       </section>
     );
   }
 }
 
-export default CategoryItem;
+const mapStateToProps = (state) => {
+  return {
+    expenses: state.expenses,
+  };
+};
+
+let mapDispatchToProps = dispatch => ({
+  categoryUpdate: (category) => dispatch(categoryUpdate(category)),
+  categoryDelete: (category) => dispatch(categoryDelete(category)),
+  expenseCreate: (expense) => dispatch(expenseActionCreate(expense)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(CategoryItem);
