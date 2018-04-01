@@ -1,0 +1,15 @@
+@import '../../style/lib/vars';
+
+.budget-content {
+  color: $primary-color;
+  font-size: $font-sm;
+  font-weight: 200;
+  letter-spacing: $letter-spacing-sm;
+  padding-left: 75%;
+}
+.budget-content p {
+  margin-bottom: .75vw;
+}
+.bold {
+  font-weight: 500;
+}

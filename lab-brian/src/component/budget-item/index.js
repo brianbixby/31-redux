@@ -1,5 +1,6 @@
 'use strict';
 
+import './_budget-item.scss';
 import React from 'react';
 import { connect } from 'react-redux';
 import BudgetForm from '../budget-form';
@@ -17,9 +18,10 @@ class BudgetItem extends React.Component{
     return (
       <section className='budget-item'>
         <div>
-          <div className='content'>
-            <p>{budget.budgetName}</p> 
-            <p>{budget.totalBudget}</p>
+          <div className='budget-content'>
+            <p><span className='bold'>name:</span> {budget.budgetName}</p> 
+            <p><span className='bold'>initial: </span> ${budget.totalBudget}</p>
+            <p><span className='bold'>remaining: </span> $ </p>
             <button onClick={() => budgetDelete(budget)}>X</button>
           </div>
           <div className='edit'>
@@ -31,7 +33,7 @@ class BudgetItem extends React.Component{
           </div>
         </div>
         <div className='categories-container'>
-          <p>create a new category.</p>
+          <p className='title cat-title'>create a new category.</p>
           <CategoryForm
             budgetID={budget.id}
             buttonText='create category'

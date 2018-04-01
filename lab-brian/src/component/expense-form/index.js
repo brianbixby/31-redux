@@ -1,5 +1,6 @@
 'use strict';
 
+import './_expense-form.scss';
 import React from 'react';
 
 class ExpenseForm extends React.Component {
@@ -51,18 +52,18 @@ class ExpenseForm extends React.Component {
   render() {
     return (
       <div>
-        <form className='expense-form' onSubmit={this.handleSubmit}>
+        <form className='expense-form form' onSubmit={this.handleSubmit}>
           <input 
             name='expenseName'
             type='text'
-            placeholder='expense name'
+            placeholder='expense name...'
             value={this.state.expenseName}
             onChange={this.handleChange}
           />
           <input 
             name='expensePrice'
             type='number'
-            placeholder='expense amount'
+            placeholder='$ expense budget...'
             value={this.state.expensePrice}
             onChange={this.handleChange}
           />

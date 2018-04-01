@@ -1,5 +1,6 @@
 'use strict';
 
+import './_category-item.scss';
 import React from 'react';
 import { connect } from 'react-redux';
 import CategoryForm from '../category-form';
@@ -22,8 +23,7 @@ class CategoryItem extends React.Component{
               { categories.map(category => console.log(category))}
               { categories.map(category => 
                 <li className='category-item' key={category}>
-                  <p>{category.name}</p> 
-                  <p>{category.budget}</p>
+                  <p className='category'><span className='categoryTitle'>{category.name}</span>total: <span className='categoryBudget'> {category.budget}</span></p> 
                   <button onClick={() => categoryDelete(category)}>X</button>
                   <CategoryForm 
                     category={category}
@@ -31,12 +31,14 @@ class CategoryItem extends React.Component{
                     onComplete={categoryUpdate}
                   />
                   <div className='expenses-container'>
-                    <p>create a new expense.</p>
-                    <ExpenseForm
-                      categoryID={category.id}
-                      buttonText='create expense'
-                      onComplete={this.props.expenseCreate}
-                    />
+                    <p className='expense-title title'>create a new expense.</p>
+                    <div className='expense-outer-div'>
+                      <ExpenseForm
+                        categoryID={category.id}
+                        buttonText='create expense'
+                        onComplete={this.props.expenseCreate}
+                      />
+                    </div>
                     { renderIf(expenses[category.id].length, <ExpenseItem expenses={expenses[category.id]} />)}
                   </div>
                 </li>

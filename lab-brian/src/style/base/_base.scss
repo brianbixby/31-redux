@@ -1,0 +1,36 @@
+body {
+  background: #d8d8d8;
+  font-family: $font;
+}
+.container {
+  margin: 12.5vw 3.5vw 2.5vw;
+}
+a {
+  text-decoration: none;
+}
+
+button {
+  border: none;
+  background: $primary-color;
+  color: $white;
+  border-radius: $radius;
+  font-size: $font-sm;
+  padding: $btn-pad;
+  text-transform: lowercase;
+  cursor: pointer; 
+  line-height: 3.5vw;
+}
+
+input[type="text"], input[type="email"], input[type="number"] {
+  padding: $input-pad;
+  border: solid .3vw $primary-color;
+  margin-right: 5vw;
+  margin-bottom: $gutter-sm;
+  font-size: $font-sm;
+  border-radius: $radius;
+  line-height: 3.5vw;
+  width: calc(70% - 5vw);
+}
+input:active, input:focus, button:active, button:focus {
+  outline: none;
+}
