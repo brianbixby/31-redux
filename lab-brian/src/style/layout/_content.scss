@@ -5,9 +5,6 @@
   letter-spacing: $letter-spacing-lg;
   font-size: $font-lg;
 }
-.cat-title {
-  margin-top: 0;
-}
 .form {
   padding: 3vw 0;
   border-bottom: .25vw #979797 solid;
@@ -41,4 +38,11 @@
 }
 .category-item .category-form .fa-pencil {
   color: #4a4a4a;
+}
+.expenseName .fa-pencil {
+  float: right;
+  cursor: pointer;
+}
+.red {
+  color: red;
 }

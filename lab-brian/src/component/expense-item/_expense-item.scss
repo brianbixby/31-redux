@@ -8,15 +8,20 @@
   border: solid 0.25vw #B2B2B2;
   background: #D8D8D8;
   color: #4a4a4a;
-  position: relative;
   display: inline-block;
   padding: 2vw;
 }
 .expenseDeleteButton {
-  position: absolute;
-  top: 1.5vw;
-  right: 1.5vw;
+  text-align: right;
+  margin-bottom: 7vw;
   cursor: pointer;
   font-size: 2vw;
   font-weight: 200;
+}
+.expenseName {
+  font-weight: 100;
+  margin-bottom: 2vw;
+}
+.expensePrice {
+  font-size: 3.5vw;
 }
