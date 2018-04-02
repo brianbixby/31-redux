@@ -1,5 +1,6 @@
 'use strict';
 
+import './_dashboard.scss';
 import React from 'react';
 import { connect } from 'react-redux';
 
@@ -20,23 +21,22 @@ class Dashboard extends React.Component {
     return (
       <main className='dashboard'>
         <Navbar />
-
-        <p>create a new budget.</p>
-
-        <BudgetForm
-          buttonText='create budget'
-          onComplete={this.props.budgetCreate}
-        />
-
-        {this.props.budgets.map(item => 
-          <BudgetItem 
-            key={item.id} 
-            budget={item} 
-            categories={this.props.categories}
-            onComplete={this.props.categoryActionCreate}
+        <div className='container'>
+          {this.props.budgets.map(item => 
+            <BudgetItem 
+              key={item.id} 
+              budget={item} 
+              categories={this.props.categories}
+              onComplete={this.props.categoryActionCreate}
+            />
+          )}
+          <p className='title'>create a new budget.</p>
+          <BudgetForm
+            buttonText='create budget'
+            onComplete={this.props.budgetCreate}
           />
-        )}
 
+        </div>
         <Footer />
       </main>
     );

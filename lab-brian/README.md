@@ -1,8 +1,8 @@
 # Code Fellows: Code 401d22: Full-Stack JavaScript
 
-## Lab 31: Redux
+## Lab 31-34: Redux
 
-Intro to React Redux with a budget tracker app.. 
+Intro to React Redux with a budget tracker app. This last submittal was designed to get us styling experience within React using SASS. 
 
 ## Tech/frameworks/packages
 

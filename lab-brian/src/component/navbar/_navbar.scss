@@ -1,11 +1,17 @@
+@import '../../style/lib/vars';
+
 .navbar {
-  background: #4a4a4a;
-  padding: 16px 15px;
+  background: $primary-color;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  padding: 3.75vw $gutter-sm;
+  font-size: $font-lg;
 }
 .navbar a {
-  color: #9b9b9b;
-  text-decoration: none;
-  font-family: sans-serif;
+  color: $secondary-color;
   font-weight: 400;
-  letter-spacing: 1px;
+  letter-spacing: $letter-spacing-sm;
+  font-size: $font-lg;
+  line-height: 1;
 }

@@ -7,8 +7,12 @@ export default (state=initialState, action) => {
   // destructuring same as let type = action.type;
   switch(type) {
     case 'BUDGET_DELETE':
-      // console.log('__EXPENSESREDUCER STATE__', state);
+      // console.log('__CATEGORIESREDUCER STATE__', state);
       var newState = Object.keys(state).reduce((acc, key) => {
+        console.log('state: ', state);
+        console.log('key: ', key);
+        console.log('payload.id: ', payload.id);
+        console.log('payload', payload);
         if (key !== payload.id) {
           acc[key] = state[key];
         }
@@ -21,13 +25,17 @@ export default (state=initialState, action) => {
       return {...state, [payload.id] : []};
     case 'CATEGORY_DELETE':
       // console.log('__EXPENSESREDUCER STATE__', state);
-      // let newState = Object.keys(state).reduce((acc, key) => {
-      //   if (key !== payload.id) {
-      //     acc[key] = state[key];
-      //   }
-      // }, {})
-      // return newState;
-      return {...state, [payload.id] : undefined};
+      newState = Object.keys(state).reduce((acc, key) => {
+        console.log('state: ', state);
+        console.log('key: ', key);
+        console.log('payload.id: ', payload.id);
+        if (key !== payload.id) {
+          acc[key] = state[key];
+        }
+        return acc;
+      }, {});
+      return newState;
+      // return {...state, [payload.id] : undefined};
     case 'EXPENSE_CREATE':
       // console.log('__EXPENSESREDUCER STATE__', state);
       var {categoryID} = payload;

@@ -1,5 +1,6 @@
 'use strict';
 
+import './_category-item.scss';
 import React from 'react';
 import { connect } from 'react-redux';
 import CategoryForm from '../category-form';
@@ -11,8 +12,20 @@ import { expenseCreate as expenseActionCreate } from '../../action/expense-actio
 import { renderIf } from './../../lib/util';
 
 class CategoryItem extends React.Component{
+  constructor(props) {
+    super(props);
+
+    this.state = {hide: false };
+
+    this.toggleClass = this.toggleClass.bind(this);
+  }
+
+  toggleClass() {
+    !this.state.hide ? this.setState({hide: true}) : this.setState({hide: false});
+  }
+
   render() {
-    let {categories, categoryUpdate, categoryDelete, expenses} = this.props;
+    let {categories, categoryUpdate, categoryDelete, expenses, budget} = this.props;
 
     return (
       <section className='category-item'>
@@ -22,21 +35,26 @@ class CategoryItem extends React.Component{
               { categories.map(category => console.log(category))}
               { categories.map(category => 
                 <li className='category-item' key={category}>
-                  <p>{category.name}</p> 
-                  <p>{category.budget}</p>
-                  <button onClick={() => categoryDelete(category)}>X</button>
-                  <CategoryForm 
-                    category={category}
-                    buttonText='UPDATE CATEGORY'
-                    onComplete={categoryUpdate}
-                  />
-                  <div className='expenses-container'>
-                    <p>create a new expense.</p>
-                    <ExpenseForm
-                      categoryID={category.id}
-                      buttonText='create expense'
-                      onComplete={this.props.expenseCreate}
+                  <p className='category'><span className='categoryTitle'>{category.name}</span>total: <span className='categoryBudget'> {category.budget}</span> <i className="fa fa-trash" onClick={() => categoryDelete(category)}></i> <i className="fa fa-pencil" onClick={() => this.toggleClass()}></i></p> 
+                  {/* <button onClick={() => categoryDelete(category)}>X</button> */}
+                  {renderIf(this.state.hide,
+                    <CategoryForm 
+                      category={category}
+                      buttonText='UPDATE CATEGORY'
+                      onComplete={categoryUpdate}
+                      toggleClass={this.toggleClass}
                     />
+                  )}
+                  <div className='expenses-container'>
+                    <p className='expense-title title'>create a new expense.</p>
+                    <div className='expense-outer-div'>
+                      <ExpenseForm
+                        categoryID={category.id}
+                        budgetID={budget.id}
+                        buttonText='create expense'
+                        onComplete={this.props.expenseCreate}
+                      />
+                    </div>
                     { renderIf(expenses[category.id].length, <ExpenseItem expenses={expenses[category.id]} />)}
                   </div>
                 </li>

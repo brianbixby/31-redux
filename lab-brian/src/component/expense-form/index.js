@@ -1,11 +1,12 @@
 'use strict';
 
+import './_expense-form.scss';
 import React from 'react';
 
 class ExpenseForm extends React.Component {
   constructor(props) {
     super(props);
-    this.state = props.expense ? {...props.expense} : { expenseName: '', expensePrice: 0, categoryID: props.categoryID};
+    this.state = props.expense ? {...props.expense} : { expenseName: '', expensePrice: 0, categoryID: props.categoryID, budgetID: props.budgetID};
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -18,6 +19,10 @@ class ExpenseForm extends React.Component {
 
     if (nextProps.categoryID) {
       this.setState( {categoryID: nextProps.categoryID });
+    }
+
+    if (nextProps.budgetID) {
+      this.setState( {budgetID: nextProps.budgetID });
     }
   }
 
@@ -43,6 +48,9 @@ class ExpenseForm extends React.Component {
     e.preventDefault();
     this.props.onComplete(this.state);
     // this.props.onComplete({...this.state});
+    if(this.props.toggleClass) {
+      this.props.toggleClass();
+    }
     if(!this.props.expense) {
       this.setState({ expenseName: '', expensePrice: 0 });
     }
@@ -51,18 +59,18 @@ class ExpenseForm extends React.Component {
   render() {
     return (
       <div>
-        <form className='expense-form' onSubmit={this.handleSubmit}>
+        <form className='expense-form form' onSubmit={this.handleSubmit}>
           <input 
             name='expenseName'
             type='text'
-            placeholder='expense name'
+            placeholder='expense name...'
             value={this.state.expenseName}
             onChange={this.handleChange}
           />
           <input 
             name='expensePrice'
             type='number'
-            placeholder='expense amount'
+            placeholder='$ expense budget...'
             value={this.state.expensePrice}
             onChange={this.handleChange}
           />

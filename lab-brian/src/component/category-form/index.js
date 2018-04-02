@@ -1,5 +1,6 @@
 'use strict';
 
+import './_category-form.scss';
 import React from 'react';
 
 class CategoryForm extends React.Component {
@@ -43,6 +44,9 @@ class CategoryForm extends React.Component {
     e.preventDefault();
     this.props.onComplete(this.state);
     // this.props.onComplete({...this.state});
+    if(this.props.toggleClass) {
+      this.props.toggleClass();
+    }
     if(!this.props.category) {
       this.setState({ name: '', budget: 0 });
     }
@@ -50,8 +54,8 @@ class CategoryForm extends React.Component {
 
   render() {
     return (
-      <div>
-        <form className='category-form' onSubmit={this.handleSubmit}>
+      <div className='category-form-div'>
+        <form className='category-form form' onSubmit={this.handleSubmit}>
           <input 
             name='name'
             type='text'

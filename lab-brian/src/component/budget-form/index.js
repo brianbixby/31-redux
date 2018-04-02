@@ -1,5 +1,6 @@
 'use strict';
 
+import './_budget-form.scss';
 import React from 'react';
 
 class BudgetForm extends React.Component {
@@ -39,7 +40,9 @@ class BudgetForm extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
     this.props.onComplete({...this.state});
-
+    if(this.props.toggleClass) {
+      this.props.toggleClass();
+    }
     if(!this.props.budget) {
       this.setState({ budgetName: '', totalBudget: 0 });
     }
@@ -48,7 +51,7 @@ class BudgetForm extends React.Component {
   render() {
     return (
       <div>
-        <form className='budget-form' onSubmit={this.handleSubmit}>
+        <form className='budget-form form' onSubmit={this.handleSubmit}>
           <input 
             name='budgetName'
             type='text'
