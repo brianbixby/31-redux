@@ -13,7 +13,7 @@ import { renderIf } from './../../lib/util';
 
 class CategoryItem extends React.Component{
   render() {
-    let {categories, categoryUpdate, categoryDelete, expenses} = this.props;
+    let {categories, categoryUpdate, categoryDelete, expenses, budget} = this.props;
 
     return (
       <section className='category-item'>
@@ -23,8 +23,8 @@ class CategoryItem extends React.Component{
               { categories.map(category => console.log(category))}
               { categories.map(category => 
                 <li className='category-item' key={category}>
-                  <p className='category'><span className='categoryTitle'>{category.name}</span>total: <span className='categoryBudget'> {category.budget}</span></p> 
-                  <button onClick={() => categoryDelete(category)}>X</button>
+                  <p className='category'><span className='categoryTitle'>{category.name}</span>total: <span className='categoryBudget'> {category.budget}</span> <i className="fa fa-trash" onClick={() => categoryDelete(category)}></i></p> 
+                  {/* <button onClick={() => categoryDelete(category)}>X</button> */}
                   <CategoryForm 
                     category={category}
                     buttonText='UPDATE CATEGORY'
@@ -35,6 +35,7 @@ class CategoryItem extends React.Component{
                     <div className='expense-outer-div'>
                       <ExpenseForm
                         categoryID={category.id}
+                        budgetID={budget.id}
                         buttonText='create expense'
                         onComplete={this.props.expenseCreate}
                       />

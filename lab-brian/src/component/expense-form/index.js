@@ -6,7 +6,7 @@ import React from 'react';
 class ExpenseForm extends React.Component {
   constructor(props) {
     super(props);
-    this.state = props.expense ? {...props.expense} : { expenseName: '', expensePrice: 0, categoryID: props.categoryID};
+    this.state = props.expense ? {...props.expense} : { expenseName: '', expensePrice: 0, categoryID: props.categoryID, budgetID: props.budgetID};
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -19,6 +19,10 @@ class ExpenseForm extends React.Component {
 
     if (nextProps.categoryID) {
       this.setState( {categoryID: nextProps.categoryID });
+    }
+
+    if (nextProps.budgetID) {
+      this.setState( {budgetID: nextProps.budgetID });
     }
   }
 

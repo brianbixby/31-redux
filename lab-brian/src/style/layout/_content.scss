@@ -11,4 +11,34 @@
 .form {
   padding: 3vw 0;
   border-bottom: .25vw #979797 solid;
+  width: 93vw;
+}
+.category, .category-form, .category-form input, .category-form-div {
+  display: inline-block;
+}
+.category-item .category-form {
+  width: 63vw;
+  border-bottom: none;
+  text-align: right;
+}
+.category-item .category-form input{
+  width: 20vw;
+  border-color: #979797;
+  color: #979797;
+  padding: 0 2vw;
+}
+.category-item .category-form input:nth-child(3){
+  margin-right: 0;
+}
+
+.category-item .category-form button{
+  display: none;
+}
+
+.category-item .category-form i {
+  display: inline-block;
+  margin-right: 2vw;
+}
+.category-item .category-form .fa-pencil {
+  color: #4a4a4a;
 }

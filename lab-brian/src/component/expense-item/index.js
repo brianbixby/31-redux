@@ -36,8 +36,6 @@ class ExpenseItem extends React.Component {
   }
 }
 
-
-
 let mapDispatchToProps = dispatch => ({
   expenseUpdate: (expense) => dispatch(expenseUpdate(expense)),
   expenseDelete: (expense) => dispatch(expenseDelete(expense)),

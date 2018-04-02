@@ -10,4 +10,4 @@ import validateExpense from './validate-expense.js';
 // console.log('__STORE CREATESTORE__', createStore);
 // console.log('__STORE APPLYMIDDLEWARE__', applyMiddleware);
 
-export default () => createStore(reducer, applyMiddleware(reporter, validateBudget, validateCategory, validateExpense));
+export default () => createStore(reducer, applyMiddleware( reporter, validateBudget, validateCategory, validateExpense));

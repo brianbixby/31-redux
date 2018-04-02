@@ -15,14 +15,21 @@ class BudgetItem extends React.Component{
   render() {
     let {budget, budgetUpdate, budgetDelete, categories} = this.props;
     // console.log('categories: ', categories);
+
+    // let totalSpent = this.state.expenses.reduce((p, c) => {
+    //   return p + c.price;
+    // }, 0);
+
+    // let remainingBudget = app.state.total - totalSpent;
     return (
       <section className='budget-item'>
         <div>
           <div className='budget-content'>
+            <i className="fa fa-trash" onClick={() => budgetDelete(budget)}></i>
             <p><span className='bold'>name:</span> {budget.budgetName}</p> 
             <p><span className='bold'>initial: </span> ${budget.totalBudget}</p>
             <p><span className='bold'>remaining: </span> $ </p>
-            <button onClick={() => budgetDelete(budget)}>X</button>
+            {/* <button onClick={() => budgetDelete(budget)}>X</button> */}
           </div>
           <div className='edit'>
             <BudgetForm
@@ -39,7 +46,7 @@ class BudgetItem extends React.Component{
             buttonText='create category'
             onComplete={this.props.categoryCreate}
           />
-          { renderIf(categories[budget.id].length, <CategoryItem categories={categories[budget.id]} />)}
+          { renderIf(categories[budget.id].length, <CategoryItem categories={categories[budget.id]} budget={budget} />)}
         </div>
       </section>
     );

@@ -5,6 +5,7 @@
   font-weight: 500;
   color: #4a4a4a;
   font-size: 2vw;
+  width: 30vw;
 }
 .categoryTitle {
   font-weight: 300;
@@ -38,4 +39,9 @@
 }
 .expense-form {
   width: 40vw;
+}
+.fa-trash{
+  color: #4a4a4a;
+  margin-left: 2vw;
+  cursor: pointer;
 }

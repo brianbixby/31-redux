@@ -53,6 +53,7 @@ class CategoryForm extends React.Component {
     return (
       <div className='category-form-div'>
         <form className='category-form form' onSubmit={this.handleSubmit}>
+          <i className="fa fa-pencil"></i>
           <input 
             name='name'
             type='text'
