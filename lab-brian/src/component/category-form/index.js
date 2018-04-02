@@ -44,6 +44,9 @@ class CategoryForm extends React.Component {
     e.preventDefault();
     this.props.onComplete(this.state);
     // this.props.onComplete({...this.state});
+    if(this.props.toggleClass) {
+      this.props.toggleClass();
+    }
     if(!this.props.category) {
       this.setState({ name: '', budget: 0 });
     }
@@ -53,7 +56,6 @@ class CategoryForm extends React.Component {
     return (
       <div className='category-form-div'>
         <form className='category-form form' onSubmit={this.handleSubmit}>
-          <i className="fa fa-pencil"></i>
           <input 
             name='name'
             type='text'

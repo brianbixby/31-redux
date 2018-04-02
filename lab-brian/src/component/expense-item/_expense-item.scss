@@ -1,26 +1,29 @@
 @import '../../style/lib/vars';
 
 .expense-item-section {
-  display: inline-block;
+    display: inline-block;
+    width: 67%;
 }
 .expense-item {
-  border-radius: 0.5vw;
-  border: solid 0.25vw #B2B2B2;
-  background: #D8D8D8;
-  color: #4a4a4a;
-  display: inline-block;
-  padding: 2vw;
+    border-radius: 1vw;
+    border: solid 0.25vw #B2B2B2;
+    background: #D8D8D8;
+    color: #4a4a4a;
+    display: inline-block;
+    padding: 2vw;
+    width: 41%;
+    margin-right: 1%;
 }
 .expenseDeleteButton {
   text-align: right;
-  margin-bottom: 7vw;
+  margin-bottom: 3vw;
   cursor: pointer;
   font-size: 2vw;
   font-weight: 200;
 }
 .expenseName {
   font-weight: 100;
-  margin-bottom: 2vw;
+  margin-bottom: 5vw;
 }
 .expensePrice {
   font-size: 3.5vw;

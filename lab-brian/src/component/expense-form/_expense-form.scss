@@ -8,3 +8,9 @@
   width: 80%;
   margin-right: 0;
 }
+.expense-form button {
+  display: none;
+}
+.expense-item .expense-form button {
+  display: inline-block;
+}

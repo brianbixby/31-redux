@@ -1,11 +1,11 @@
 @import '../../style/lib/vars';
 
 .category {
-  margin: 2vw 0;
   font-weight: 500;
   color: #4a4a4a;
   font-size: 2vw;
   width: 30vw;
+  margin: 3.8vw 0 6vw;
 }
 .categoryTitle {
   font-weight: 300;
@@ -40,8 +40,12 @@
 .expense-form {
   width: 40vw;
 }
-.fa-trash{
+.category .fa-trash, .category .fa-pencil{
   color: #4a4a4a;
   margin-left: 2vw;
   cursor: pointer;
+}
+li.category-item {
+  border-bottom: .25vw #979797 solid;
+  padding-bottom: 3vw;
 }

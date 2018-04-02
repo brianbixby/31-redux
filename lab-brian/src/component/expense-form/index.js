@@ -48,6 +48,9 @@ class ExpenseForm extends React.Component {
     e.preventDefault();
     this.props.onComplete(this.state);
     // this.props.onComplete({...this.state});
+    if(this.props.toggleClass) {
+      this.props.toggleClass();
+    }
     if(!this.props.expense) {
       this.setState({ expenseName: '', expensePrice: 0 });
     }

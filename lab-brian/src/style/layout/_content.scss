@@ -24,7 +24,7 @@
   color: #979797;
   padding: 0 2vw;
 }
-.category-item .category-form input:nth-child(3){
+.category-item .category-form input:nth-child(2){
   margin-right: 0;
 }
 
@@ -45,4 +45,7 @@
 }
 .red {
   color: red;
+}
+.fa-pencil, .fa-trash {
+  cursor: pointer;
 }

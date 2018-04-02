@@ -7,6 +7,7 @@
   letter-spacing: $letter-spacing-sm;
   padding-left: 75%;
   margin-bottom: -2vw;
+  margin-top: 2vw;
 }
 .budget-content p {
   margin-bottom: .75vw;
@@ -16,4 +17,7 @@
 }
 .floatRight {
   float: right;
+}
+.budget-content .fa-pencil {
+  margin-right: 2vw;
 }

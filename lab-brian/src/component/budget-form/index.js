@@ -40,8 +40,9 @@ class BudgetForm extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
     this.props.onComplete({...this.state});
-    this.props.toggleClass();
-
+    if(this.props.toggleClass) {
+      this.props.toggleClass();
+    }
     if(!this.props.budget) {
       this.setState({ budgetName: '', totalBudget: 0 });
     }

@@ -5,8 +5,20 @@ import React from 'react';
 import { connect } from 'react-redux';
 import ExpenseForm from '../expense-form';
 import { expenseUpdate, expenseDelete } from '../../action/expense-action.js';
+import { renderIf } from './../../lib/util';
 
 class ExpenseItem extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {hiding: false };
+
+    this.toggleClass = this.toggleClass.bind(this);
+  }
+
+  toggleClass() {
+    !this.state.hiding ? this.setState({hiding: true}) : this.setState({hiding: false});
+  }
   render() {
     let {expenses, expenseUpdate, expenseDelete} = this.props;
     // same as let expense = this.props.expense;
@@ -19,13 +31,20 @@ class ExpenseItem extends React.Component {
               { expenses.map(expense => 
                 <li className='expense-item' key={expense}>
                   <p className='expenseDeleteButton'onClick={() => expenseDelete(expense)}>X</p>
-                  <p className='expenseName'>{expense.expenseName} <i className="fa fa-pencil"></i></p>
-                  <p className='expensePrice'>${expense.expensePrice}</p>
-                  <ExpenseForm 
-                    expense={expense}
-                    buttonText='UPDATE'
-                    onComplete={expenseUpdate}
-                  />
+                  {renderIf(!this.state.hiding,
+                    <div>
+                      <p className='expenseName'>{expense.expenseName} <i className="fa fa-pencil" onClick={() => this.toggleClass()}></i></p>
+                      <p className='expensePrice'>${expense.expensePrice}</p>
+                    </div>
+                  )}
+                  {renderIf(this.state.hiding,
+                    <ExpenseForm 
+                      expense={expense}
+                      buttonText='UPDATE'
+                      onComplete={expenseUpdate}
+                      toggleClass={this.toggleClass}
+                    />
+                  )}
                 </li>
               )}
             </ul>
